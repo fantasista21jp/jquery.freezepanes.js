@@ -102,7 +102,7 @@
 
     var cols_id = null,
         colsboxHtml = '';
-    if (colsWidth !== 0) {
+    if (rowsHeight !== 0) {
       cols_id = unique_id+'-cols';
       colsboxHtml = '<div id="'+cols_id+'" style="width: '+(configs.width - colsWidth - scrollBarWidth)+'px; height: '+rowsHeight+'px; position: absolute; overflow: hidden; z-index: 2; top: 0px; left: '+colsWidth+'px;"></div>';
       if (configs.bordercolor) colsboxHtml += '<div style="background: '+configs.bordercolor+'; width: '+(configs.width - scrollBarWidth)+'px; height: 1px; position: absolute; overflow: hidden; z-index: 5; top: '+rowsHeight+'px; left: 0px;">&nbsp;</div>';
@@ -110,7 +110,7 @@
 
     var rows_id = null,
         rowsboxHtml = '';
-    if (rowsHeight !== 0) {
+    if (colsWidth !== 0) {
       rows_id = unique_id+'-rows';
       rowsboxHtml = '<div id="'+rows_id+'" style="width: '+colsWidth+'px; height: '+(configs.height - rowsHeight - scrollBarHeight)+'px; position: absolute; overflow: hidden; z-index: 3; top: '+rowsHeight+'px; left: 0px;"></div>';
       if (configs.bordercolor) rowsboxHtml += '<div style="background: '+configs.bordercolor+'; width: 1px; height: '+(configs.height - scrollBarHeight)+'px; position: absolute; overflow: hidden; z-index: 6; top: 0px; left: '+colsWidth+'px;">&nbsp;</div>';
@@ -194,6 +194,7 @@
     function destroy() {
       var data = _getData(),
           $parentbox = $('#'+data.unique_id+'-parent');
+console.log(data);
       $parentbox.replaceWith($freezepanes);
       $freezepanes.css('display', '');
     }
