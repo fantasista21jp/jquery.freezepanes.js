@@ -29,11 +29,31 @@
       rows: 1,
       bordercolor: '#CC0000'
     });
+
+    $('#jquery-freezepanes-reset').click(function(){
+      $('#jquery-freezepanes').freezepanes('destroy');
+      $('input').toggle();
+    });
+    $('#jquery-freezepanes-set').click(function(){
+      $('#jquery-freezepanes').freezepanes({
+        width: 700,
+        height: 500,
+        cols: 1,
+        rows: 1,
+        bordercolor: '#CC0000'
+      });
+      $('input').toggle();
+    });
   });
 </script>
 <!-- // jquery.freezepanes -->
 </head>
 <body>
+
+<input type="button" name="jquery-freezepanes-reset" value="reset" id="jquery-freezepanes-reset" />
+<input type="button" name="jquery-freezepanes-set" value="set" id="jquery-freezepanes-set" style="display: none;" />
+
+<hr />
 
 <table id="jquery-freezepanes" summary=" ">
   <tr>

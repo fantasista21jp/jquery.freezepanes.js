@@ -34,6 +34,7 @@
     } else {
       configs = defaults;
     }
+    _setData({configs:configs});
 
     if (typeof(configs.cols) !== 'number' || typeof(configs.rows) !== 'number') return;
     if (configs.cols === 0 && configs.rows === 0) return;
@@ -47,11 +48,7 @@
         parentbox_id = unique_id+'-parent';
     $freezepanes.wrap('<div id="'+parentbox_id+'" style="width: '+configs.width+'px; height: '+configs.height+'px; position: relative; overflow: hidden;"></div>');
     var $parentbox = $('#'+parentbox_id);
-
-    $freezepanes.css({
-      position: 'absolute',
-      zIndex: 0
-    });
+    _setData({unique_id:unique_id});
 
     var cols = 0,
         rows = 0,
@@ -182,6 +179,23 @@
         return true;
       }
       return false;
+    }
+
+    function _setData(obj) {
+      var data = _getData();
+      data = $.extend(data, obj);
+      $.data($freezepanes.get(0), 'freezepanes', data);
+    }
+
+    function _getData() {
+      return $.data($freezepanes.get(0), 'freezepanes');
+    }
+
+    function destroy() {
+      var data = _getData(),
+          $parentbox = $('#'+data.unique_id+'-parent');
+      $parentbox.replaceWith($freezepanes);
+      $freezepanes.css('display', '');
     }
 
     return this;
