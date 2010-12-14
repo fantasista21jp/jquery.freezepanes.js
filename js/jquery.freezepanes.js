@@ -34,6 +34,8 @@
     } else {
       configs = defaults;
     }
+    configs.orig_width = configs.width;
+    configs.orig_height = configs.height;
     _setData({configs:configs});
 
     if (typeof(configs.cols) !== 'number' || typeof(configs.rows) !== 'number') return;
@@ -92,6 +94,26 @@
 
     var scrollBarWidth = $bodybox.outerWidth() - $bodybox.get(0).clientWidth,
         scrollBarHeight = $bodybox.outerHeight() - $bodybox.get(0).clientHeight;
+    if (configs.orig_width === 0) {
+      $parentbox.css('width', configs.width + scrollBarWidth);
+      $bodybox.css({
+        width: configs.width - colsWidth + scrollBarWidth,
+        overflow: 'visible',
+        overflowY: 'scroll'
+      });
+    }
+    if (configs.orig_height === 0) {
+      $parentbox.css('height', configs.height + scrollBarHeight);
+      $bodybox.css({
+        height: configs.height - rowsHeight + scrollBarHeight,
+        overflow: 'visible',
+        overflowX: 'scroll'
+      });
+    }
+    if (configs.orig_width === 0 || configs.orig_height === 0) {
+      scrollBarWidth = 0;
+      scrollBarHeight = 0;
+    }
 
     var header_id = null,
         headerboxHtml = '';
@@ -166,7 +188,7 @@
     function _scrollX() {
       if ($bodybox.scrollLeft() != scrollLeft) {
         scrollLeft = $bodybox.scrollLeft();
-        $colstable.css('left', '-'+(colsWidth+scrollLeft)+'px');
+        if (cols_id) $colstable.css('left', '-'+(colsWidth+scrollLeft)+'px');
         return true;
       }
       return false;
@@ -175,7 +197,7 @@
     function _scrollY() {
       if ($bodybox.scrollTop() != scrollTop) {
         scrollTop = $bodybox.scrollTop();
-        $rowstable.css('top', '-'+(rowsHeight+scrollTop)+'px');
+        if (rows_id) $rowstable.css('top', '-'+(rowsHeight+scrollTop)+'px');
         return true;
       }
       return false;
@@ -194,7 +216,6 @@
     function destroy() {
       var data = _getData(),
           $parentbox = $('#'+data.unique_id+'-parent');
-console.log(data);
       $parentbox.replaceWith($freezepanes);
       $freezepanes.css('display', '');
     }
