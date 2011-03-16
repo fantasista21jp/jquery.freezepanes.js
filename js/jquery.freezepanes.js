@@ -181,8 +181,8 @@
     });
 
     function _scroll() {
-      if (_scrollX()) return;
-      if (_scrollY()) return;
+      _scrollX();
+      _scrollY();
     }
 
     function _scrollX() {
