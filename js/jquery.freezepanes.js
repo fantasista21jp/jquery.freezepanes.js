@@ -1,7 +1,7 @@
 /*
  * jQuery freezepanes (jQuery Plugin)
  *
- * Copyright (c) 2010 Tom Shimada
+ * Copyright (c) 2011 Tom Shimada
  *
  * Depends Script:
  *	js/jquery.js (1.3.2~)
