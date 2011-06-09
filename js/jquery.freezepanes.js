@@ -26,7 +26,7 @@
         try{
           eval(configs)();
         } catch(e) {
-          alert(e);
+          if('console' in window) console.log(e);
         }
         return;
       }
