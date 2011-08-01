@@ -7,6 +7,7 @@
  *	js/jquery.js (1.3.2~)
  */
 
+var jquery_freezepanes_uuid = 0;
 (function($) {
   $.fn.freezepanes = function(configs) {
     var defaults = {
@@ -46,8 +47,9 @@
     if (configs.width > $freezepanes.outerWidth() || configs.width === 0) configs.width = $freezepanes.outerWidth();
     if (configs.height > $freezepanes.outerHeight() || configs.height === 0) configs.height = $freezepanes.outerHeight();
 
-    var unique_id = 'jquery-freezepanes-'+$.data($freezepanes),
+    var unique_id = 'jquery-freezepanes-'+jquery_freezepanes_uuid,
         parentbox_id = unique_id+'-parent';
+    jquery_freezepanes_uuid ++;
     $freezepanes.wrap('<div id="'+parentbox_id+'" style="width: '+configs.width+'px; height: '+configs.height+'px; position: relative; overflow: hidden;"></div>');
     var $parentbox = $('#'+parentbox_id);
     _setData({unique_id:unique_id});
